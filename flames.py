@@ -1,9 +1,30 @@
-# Flames
+import re
 
-boyName = "amith"
+# boyName = input("Enter your name : ")
+# girlName = input("Enter your partner name : ")
+
+
+
+boyName = "amitdh1"
 girlName = "nisha"
 
-# verify the name using regex
+def regex(boy,girl):
+    if re.match('([A-Za-z])\w+',boy) and re.match('([A-Za-z])\w+',girl):
+            result = True
+    else:
+            print("Please Recheck the Names..")
+            result = False
+    return result
+
+result = regex(boyName,girlName)
+print (result);
+if result:
+    print("done")
+else:
+    print("something wrong")
+        
+
+ 
 
 for i in boyName:
     for j in girlName:
