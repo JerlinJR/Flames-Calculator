@@ -1,41 +1,48 @@
+from operator import truediv
 import re
+import sys
 
-# boyName = input("Enter your name : ")
-# girlName = input("Enter your partner name : ")
+boyName = input("Enter your name : ")
+girlName = input("Enter your partner name : ")
+
+# boyName = "nisha"
+# girlName = "admit"
 
 
-
-boyName = "amitdh1"
-girlName = "nisha"
-
-def regex(boy,girl):
-    if re.match('([A-Za-z])\w+',boy) and re.match('([A-Za-z])\w+',girl):
-            result = True
+def innerRegex(boy,girl):
+    x=[]
+    name = boy + girl
+    for i in name:
+        if re.findall("[a-zA-Z]",i):
+            x.append(1)
+        else:
+            x.append(0)
+    x.sort(reverse = False)
+    if x[0] == 0:
+        print("Avoid Using Symbols or Numbers")
+        sys.exit()
     else:
-            print("Please Recheck the Names..")
-            result = False
-    return result
-
-result = regex(boyName,girlName)
-print (result);
-if result:
-    print("done")
-else:
-    print("something wrong")
-        
-
- 
-
-for i in boyName:
-    for j in girlName:
-        if i == j:
-            boyName = boyName.replace(i,"",1)
-            girlName = girlName.replace(j,"",1)
-            break
+        return True
 
 
-num = len(boyName+girlName)
-print(num)
+def outerRegex(boy,girl):
+    if boy == girl:
+        print("Please Give Two Different Name")
+        sys.exit()
+    elif innerRegex(boy,girl):
+        return True
+    else:
+        sys.exit()
+
+if outerRegex(boyName,girlName):
+    for i in boyName:
+        for j in girlName:
+            if i == j:
+                boyName = boyName.replace(i,"",1)
+                girlName = girlName.replace(j,"",1)
+                break
+    
+num =  len(boyName+girlName)
 
 if num > 0:
     flames = ["Friends","Lover","Affectionate","Marriage","Enemy","Sibling"]
@@ -49,10 +56,4 @@ if num > 0:
         else:
             flames = flames[:len(flames)-1]
 
-    print(flames[0])
-
-
-
-
-# print(boyName)
-# print(girlName)
+    print("RelationShip Between You and your loved one is: {}".format(flames[0]))
